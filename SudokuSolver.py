@@ -53,7 +53,7 @@ def findNextSpace(col, row):
                 row = x
                 values = [y, x]
                 return values
-            if(y == 8 and x == 8 and sudoku[y][x] is not 0):
+            if(y == 8 and x == 8 and sudoku[y][x] != 0):
                 values = [-1, -1]
                 return values
 
