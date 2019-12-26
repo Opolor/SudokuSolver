@@ -42,8 +42,8 @@ def consoleViewer():
 
 
 """
-Check if space is free
-Returns False if a number already exists in given space
+Checks for the next free space returns index values
+Returns -1 when Sudoku is complete (i.e. no 0s in sudoku)
 """
 def findNextSpace(col, row):
     for y in range((len(sudoku))):
@@ -266,16 +266,28 @@ def Sudokusolver():
     #If retuns false returns to call stack before and continues on line 276
     return False
 
+
+
+
 """
 Main
 """
 try:
+    #Starts timer
     start_time = time.time()
+
+    #Formats input
     sudokuFormatter("./Sudoku.txt")
+
+    #Checks if Sudoku is solvable and solves it
     if(Sudokusolver()):
         elapsed_time = time.time() - start_time
         logging.info("TIME ELAPSED: "+str(elapsed_time)+" seconds")
+
+        #Prints complete Sudoku in console
         consoleViewer()
+
+        #Writes Sudoku to file
         f = open("./SudokuSolution.txt", "w")
         for arr in sudoku:
             for num in arr:
@@ -285,8 +297,8 @@ try:
         f.write("\n")
         f.write("Finished Sudoku in "+str(elapsed_time)+" seconds")
         f.close
-
     else:
         logging.warn("No Solution Found")
+
 except Exception as identifier:
     logging.error(identifier)
